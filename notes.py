@@ -9,12 +9,15 @@ def read_notes():
     return data
 
 def print_notes(data_start=None, data_finish=None):
-    data = read_notes()
-    if data_start:
-        data = data[data['last_change'] >= data_start]
-    if data_finish:
-        data = data[data['last_change'] <= data_finish]
-    print(data.head(10))
+    if not os.path.exists('notes.csv'):
+        print('Заметок пока нет!')
+    else:
+        data = read_notes()
+        if data_start:
+            data = data[data['last_change'] >= data_start]
+        if data_finish:
+            data = data[data['last_change'] <= data_finish]
+        print(data.head(10))
 
 
 class Note:
